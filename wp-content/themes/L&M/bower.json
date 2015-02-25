@@ -1,0 +1,17 @@
+{
+  "name": "L-M",
+  "version": "0.0.0",
+  "homepage": "https://github.com/mauricio-gamboa/L-M",
+  "authors": [
+    "Mauricio Gamboa <magalocr@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "~3.3.2",
+    "angular": "~1.3.12",
+    "OwlCarousel": "~1.3.2",
+    "angular-scroll": "~0.6.4",
+    "font-awesome": "~4.3.0"
+  }
+}
