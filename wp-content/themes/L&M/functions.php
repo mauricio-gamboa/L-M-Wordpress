@@ -30,10 +30,26 @@ add_action('wp_enqueue_scripts', 'enqueue_scripts');
 
 if (!function_exists('l_m_setup')) :
   function l_m_setup() {
+    if ( function_exists('add_theme_support') ) {
+      add_theme_support('post-thumbnails');
+    }
+    
     register_nav_menu('header-menu',__( 'Header Menu' ));
   }
 endif;
 
 add_action('init', 'l_m_setup');
+
+function get_brands() {
+  global $post;
+  $brands = get_posts(array('post_type'=> 'brand', 'posts_per_page' => -1));
+  return $brands;
+}
+
+function get_testimonials() {
+  global $post;
+  $testimonials = get_posts(array('post_type'=> 'testimonial', 'posts_per_page' => -1));
+  return $testimonials;
+}
 
 require get_template_directory() . '/inc/template-tags.php';

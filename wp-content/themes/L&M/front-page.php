@@ -1,3 +1,6 @@
+<?php $brands = get_brands(); ?>
+<?php $testimonials = get_testimonials(); ?>
+
 <?php get_header(); ?>
 <section id="header">
   <div class="white-bar"></div>
@@ -190,29 +193,23 @@
           <li>Molestie blandit dui euismod nec</li>
         </ul>
       </div>
+      
       <div class="col-xs-12 col-sm-offset-2 col-sm-5 col-md-offset-4 col-md-4 col-lg-offset-4 col-lg-4">
+        <?php if($testimonials): ?>
         <div class="testimonials-slider owl-carousel" owl-single>
+          <?php foreach ( $testimonials as $key=>$post ) : setup_postdata( $post ); ?>
           <div class="testimonial">
             <blockquote>
-              <p>Nullam sollicitudin, justo sit amet dictum maximus, risus magna sollicitudin orci, sit amet posuere lacus neque a diam. Suspendisse eros elit, sodales commodo diam a, pharetra eleifend sapien.</p>
+              <?php the_content(); ?>
             </blockquote>
             <p><cite>Suspendisse Eros</cite></p>
           </div>
-          <div class="testimonial">
-            <blockquote>
-              <p>Nullam sollicitudin, justo sit amet dictum maximus, risus magna sollicitudin orci, sit amet posuere lacus neque a diam. Suspendisse eros elit, sodales commodo diam a, pharetra eleifend sapien.</p>
-            </blockquote>
-            <p><cite>Suspendisse Eros</cite></p>
-          </div>
-          <div class="testimonial">
-            <blockquote>
-              <p>Nullam sollicitudin, justo sit amet dictum maximus, risus magna sollicitudin orci, sit amet posuere lacus neque a diam. Suspendisse eros elit, sodales commodo diam a, pharetra eleifend sapien.</p>
-            </blockquote>
-            <p><cite>Suspendisse Eros</cite></p>
-          </div>
+          <?php endforeach; wp_reset_postdata(); ?>
         </div>
+        <?php endif; ?>
       </div>
     </div>
+
   </div>
   <img src="<?php bloginfo('template_directory'); ?>/public/images/guy-2.png" alt="" class="guy hide-xs">
 </section>
@@ -239,6 +236,8 @@
     </div>
   </div>
 </section>
+
+<?php if($brands): ?>
 <section id="brands">
   <div class="container">
     <div class="row">
@@ -246,16 +245,15 @@
         <div class="brands-wrapper">
           <h3>Brands we use</h3>
           <div class="brands-slider owl-carousel" owl-brands>
-            <div class="brands-slide"><img src="<?php bloginfo('template_directory'); ?>/public/images/brands-1.png" alt=""></div>
-            <div class="brands-slide"><img src="<?php bloginfo('template_directory'); ?>/public/images/brands-2.png" alt=""></div>
-            <div class="brands-slide"><img src="<?php bloginfo('template_directory'); ?>/public/images/brands-3.png" alt=""></div>
-            <div class="brands-slide"><img src="<?php bloginfo('template_directory'); ?>/public/images/brands-4.png" alt=""></div>
-            <div class="brands-slide"><img src="<?php bloginfo('template_directory'); ?>/public/images/brands-5.png" alt=""></div>
-            <div class="brands-slide"><img src="<?php bloginfo('template_directory'); ?>/public/images/brands-6.png" alt=""></div>
+            <?php foreach ( $brands as $key=>$post ) : setup_postdata( $post ); ?>
+              <div class="brands-slide"><?php the_post_thumbnail(); ?></div>
+            <?php endforeach; wp_reset_postdata(); ?>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+<?php endif; ?>
+
 <?php get_footer(); ?>
