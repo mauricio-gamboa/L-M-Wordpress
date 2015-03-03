@@ -19,6 +19,12 @@ add_action('wp_enqueue_scripts', 'enqueue_styles');
 
 function enqueue_scripts() {
   // Load our main scripts.
+
+  if (is_page('contact-us')) {
+    wp_register_script('google_maps', 'https://maps.googleapis.com/maps/api/js', array(), '1', true);
+    wp_enqueue_script('google_maps');
+  }
+  
   wp_register_script('libs', THEME_DIR . '/public/js/min/libs.min.js', array(), '1', true);
   wp_enqueue_script( 'libs' );
   

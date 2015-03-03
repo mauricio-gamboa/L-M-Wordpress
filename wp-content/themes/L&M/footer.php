@@ -6,9 +6,13 @@
             <h2>Are you looking for a repair but want a quote first?</h2>
             <p>We will respond to you within the next 24 hours</p>
           </div>
+          <?php if(is_page('contact-us')): ?>
+          <a href="#page-title" du-smooth-scroll class="my-btn btn-1">Get a free quote</a>
+          <?php else: ?>
           <a href="#quote-form" du-smooth-scroll class="my-btn btn-1 hide-s hide-xs">Get a free quote</a>
           <a href="#quote-form-small" du-smooth-scroll class="my-btn btn-1 show-s">Get a free quote</a>
           <a href="#quote-form-xs" du-smooth-scroll class="my-btn btn-1 show-xs">Get a free quote</a>
+          <?php endif; ?>
         </div>
       </div>
     </div>
