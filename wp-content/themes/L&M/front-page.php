@@ -1,5 +1,9 @@
-<?php $brands = get_brands(); ?>
-<?php $testimonials = get_testimonials(); ?>
+<?php $home_content_page = get_my_page('home-content'); ?>
+<?php $commercial_services_page = get_my_page('commercial-services'); ?>
+<?php $why_choose_us_page = get_my_page('why-choose-us'); ?>
+<?php $brands = get_my_post_type('brand'); ?>
+<?php $testimonials = get_my_post_type('testimonial'); ?>
+<?php $services = get_my_post_type('service'); ?>
 
 <?php get_header(); ?>
 <section id="header">
@@ -7,8 +11,10 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <?php if($home_content_page): ?>
+        <?php foreach ( $home_content_page as $key=>$post ) : setup_postdata( $post ); ?>
         <div class="header-text">
-          <h2>Quality Plumbing fast &amp; reliable</h2>
+          <h2><?php the_title(); ?></h2>
           <div class="phone-xs show-xs">CALL 604-879-5301</div>
           <img class="guy show-xs" src="<?php bloginfo('template_directory'); ?>/public/images/guy-xs.png" alt="">
           <div id="quote-form-xs" class="quote-form show-xs">
@@ -56,34 +62,36 @@
               </div>
             </div>
           </div>
-          <p class="hide-xs">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vitae odio blandit, aliquam felis et, tincidunt tortor. Donec a quam ac nibh tincidunt mattis. Aliquam sed bibendum velit.</p>
+          <p class="hide-xs">
+            <?php echo get_the_excerpt(); ?>
+          </p>
           <span class="phone-literal hide-xs">call <br class="show-s" /> 604-879-5301</span>
         </div>
         <img class="guy hide-xs" src="<?php bloginfo('template_directory'); ?>/public/images/guy.png" alt="">
       </div>
+      <?php endforeach; wp_reset_postdata(); ?>
+      <?php endif; ?>
     </div>
   </div>
   <section id="header-services">
     <div class="container">
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+          
+          <?php if($services): ?>
           <div class="service-wrapper list-unstyled hide-xs">
+            <?php foreach ( $services as $key=>$post ) : setup_postdata( $post ); ?>
             <div class="service">
-              <span class="services-icon icon-1"></span>
-              <h5>PLUMBInG</h5>
-              <p>Onec a quam ac nibh tdunt mattis.</p>
+              <span class="services-icon">
+                <?php if (has_post_thumbnail()) : the_post_thumbnail(); endif; ?>
+              </span>
+              <h5><?php the_title(); ?></h5>
+              <?php the_content(); ?>
             </div>
-            <div class="service">
-              <span class="services-icon icon-2"></span>
-              <h5>Heating</h5>
-              <p>Onec a quam ac nibh tdunt mattis.</p>
-            </div>
-            <div class="service">
-              <span class="services-icon icon-3"></span>
-              <h5>Air Conditioning</h5>
-              <p>Onec a quam ac nibh tdunt mattis.</p>
-            </div>
+            <?php endforeach; wp_reset_postdata(); ?>
           </div>
+          <?php endif; ?>
+          
           <div class="show-xs">
             <div class="service-wrapper list-unstyled owl-carousel" owl-services>
               <div class="service">
@@ -122,12 +130,13 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12 col-sm-7 col-md-8 col-lg-8">
+        <?php if($home_content_page): ?>
         <div class="content">
-          <h3>Phasellus eget efficitur sapien</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vitae odio blandit, aliquam felis et, tincidunt tortor. Donec a quam ac nibh tincidunt mattis. Aliquam sed bibendum velit. Praesent eget porttitor est, et molestie nisl. Sed viverra felis augue, ut commodo orci scelerisque eu. Pellentesque nec sapien eu est fermentum volutpat vel ut nulla. Etiam et leo interdum, pharetra est in, accumsan augue. Pellentesque suscipit rhoncus interdum. Aliquam sed nisl vitae mi facilisis imperdiet. Praesent rutrum vulputate tellus, vel ultrices risus imperdiet ut. Nulla lacinia tincidunt pharetra. Nunc bibendum fringilla nisi, nec egestas massa venenatis at. Aliquam dictum at libero quis malesuada. Nam eget feugiat nibh. Morbi at est nec orci efficitur ultrices non vitae tellus.</p>
-          <h3>Vivamus nec malesuada</h3>
-          <p>Phasellus a aliquam orci, sit amet venenatis turpis. Donec nec bibendum felis. Maecenas efficitur tincidunt ante non maximus. Etiam viverra aliquam ipsum vitae rutrum. In hac habitasse platea dictumst. Nulla pellentesque euismod nibh, bibendum gravida lectus pellentesque aliquet. Vivamus libero leo, consequat sed porttitor nec, bibendum a quam. Suspendisse potenti. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod orci felis, molestie blandit dui euismod nec. In et vestibulum velit. Sed lectus neque, varius vel dignissim vitae, luctus vitae urna. Aliquam molestie faucibus orci vel ullamcorper. Donec ac tellus pellentesque, scelerisque sem non, tristique turpis.</p>
+          <?php foreach ( $home_content_page as $key=>$post ) : setup_postdata( $post ); ?>
+          <?php the_content(); ?>
+          <?php endforeach; wp_reset_postdata(); ?>
         </div>
+        <?php endif; ?>
       </div>
       <div class="col-xs-12 col-sm-5 col-md-4 col-lg-4 hide-xs">
         <div id="quote-form-small" class="quote-form">
@@ -182,16 +191,14 @@
 <section id="services">
   <div class="container">
     <div class="row">
+      
       <div class="col-xs-12 col-sm-5 col-md-4 col-lg-4">
-        <h3>Commercial Services</h3>
-        <ul class="list-unstyled">
-          <li>Molestie blandit dui euismod nec</li>
-          <li>Molestie blandit dui euismod nec</li>
-          <li>Molestie blandit dui euismod nec</li>
-          <li>Molestie blandit dui euismod nec</li>
-          <li>Molestie blandit dui euismod nec</li>
-          <li>Molestie blandit dui euismod nec</li>
-        </ul>
+        <?php if($commercial_services_page): ?>
+        <?php foreach ( $commercial_services_page as $key=>$post ) : setup_postdata( $post ); ?>
+        <h3><?php the_title (); ?></h3>
+        <?php the_content(); ?>
+        <?php endforeach; wp_reset_postdata(); ?>
+        <?php endif; ?>
       </div>
       
       <div class="col-xs-12 col-sm-offset-2 col-sm-5 col-md-offset-4 col-md-4 col-lg-offset-4 col-lg-4">
@@ -202,7 +209,7 @@
             <blockquote>
               <?php the_content(); ?>
             </blockquote>
-            <p><cite>Suspendisse Eros</cite></p>
+            <p><cite><?php the_title(); ?></cite></p>
           </div>
           <?php endforeach; wp_reset_postdata(); ?>
         </div>
@@ -216,21 +223,18 @@
 <section id="why-choose-us">
   <div class="container">
     <div class="row">
-      <div class="col-xs-12 col-sm-6 col-md-8 col-lg-8">
+      <?php if($why_choose_us_page): ?>
+      <?php foreach ( $why_choose_us_page as $key=>$post ) : setup_postdata( $post ); ?>
+      <div class="col-xs-12 col-sm-6 col-md-8 col-lg-8" add-span>
         <h3>Why Choose Us?</h3>
-        <ul class="list-unstyled why-list">
-          <li class="why-1"><span></span>100% Satisfactory Guarantee</li>
-          <li class="why-2"><span></span>Fixed Right or your Money back</li>
-          <li class="why-3"><span></span>Free Inspections</li>
-          <li class="why-4"><span></span>Fully Insured</li>
-          <li class="why-5"><span></span>Fully Licensed Professionals</li>
-          <li class="why-6"><span></span>Up-Front Pricing</li>
-          <li class="why-7"><span></span>Experienced</li>
-        </ul>
+        <?php the_content(); ?>
       </div>
+      <?php endforeach; wp_reset_postdata(); ?>
+      <?php endif; ?>
+
       <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
         <div class="facebook-plugin">
-          <img src="<?php bloginfo('template_directory'); ?>/public/images/facebook-like.png" alt="">
+          <div><?php get_template_part('facebook-like'); ?></div>
         </div>
       </div>
     </div>
@@ -246,7 +250,7 @@
           <h3>Brands we use</h3>
           <div class="brands-slider owl-carousel" owl-brands>
             <?php foreach ( $brands as $key=>$post ) : setup_postdata( $post ); ?>
-              <div class="brands-slide"><?php the_post_thumbnail(); ?></div>
+              <div class="brands-slide"><?php if (has_post_thumbnail()) : the_post_thumbnail(); endif; ?></div>
             <?php endforeach; wp_reset_postdata(); ?>
           </div>
         </div>
