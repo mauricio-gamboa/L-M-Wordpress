@@ -32,7 +32,7 @@
           <div class="col-xs-12 col-sm-3 col-md-offset-1 col-md-3 col-lg-offset-4 col-lg-2">
             <div class="social-wrapper">
               <h6>We are social</h6>
-              <a href="" class="social social-fb"><span><i class="fa fa-facebook"></i></span> Become a Fan</a>
+              <a href="https://www.facebook.com/lmquality" target="_blank" class="social social-fb"><span><i class="fa fa-facebook"></i></span> Become a Fan</a>
             </div>
           </div>
         </div>
