@@ -35,21 +35,22 @@ if (!function_exists('l_m_setup')) :
     }
     
     register_nav_menu('header-menu',__( 'Header Menu' ));
+    register_nav_menu('footer-menu',__( 'Footer Menu' ));
   }
 endif;
 
 add_action('init', 'l_m_setup');
 
-function get_brands() {
+function get_my_post_type($postType) {
   global $post;
-  $brands = get_posts(array('post_type'=> 'brand', 'posts_per_page' => -1));
+  $brands = get_posts(array('post_type'=> $postType, 'posts_per_page' => -1));
   return $brands;
 }
 
-function get_testimonials() {
+function get_my_page($pageName) {
   global $post;
-  $testimonials = get_posts(array('post_type'=> 'testimonial', 'posts_per_page' => -1));
-  return $testimonials;
+  $page = get_posts(array('post_type'=> 'page', 'name' => $pageName, 'posts_per_page' => 1));
+  return $page;
 }
 
 require get_template_directory() . '/inc/template-tags.php';

@@ -97,3 +97,16 @@ myApp.directive('gmap', [function () {
     }
   };
 }]);
+
+myApp.directive('addSpan', [function () {
+  return {
+    restrict: 'A',
+
+    link: function (scope, element) {
+      var lis = element.find('li');
+      angular.forEach(lis, function(li, key) {
+        $(li).addClass('why-' + (key + 1)).prepend('<span></span>');
+      });
+    }
+  };
+}]);

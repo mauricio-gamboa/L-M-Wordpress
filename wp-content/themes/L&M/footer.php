@@ -43,8 +43,8 @@
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="footer-bottom-text">
-              &copy; 2014 L&amp;M Inc. All Rights Reserved.
-              <p><a href="">Privacy Policy</a> <span>•</span> <a href="">Terms &amp; Conditions</a></p>
+              &copy; <?php echo date('Y'); ?> <?php bloginfo( 'name' ); ?> Inc. All Rights Reserved.
+              <?php wp_nav_menu(array( 'menu' => 'footer-menu', 'container' => false, 'menu_class' => 'list-unstyled', 'link_after' => '<span></span>')); ?>
             </div>
           </div>
         </div>
