@@ -48,29 +48,7 @@
   </div>
   <div class="widget">
     <div class="facebook-plugin">
-      <img src="<?php bloginfo('template_directory'); ?>/public/images/facebook-like.png" alt="">
-    </div>
-  </div>
-  <div class="widget">
-    <div class="testimonials-slider owl-carousel" owl-single>
-      <div class="testimonial">
-        <blockquote>
-          <p>Nullam sollicitudin, justo sit amet dictum maximus, risus magna sollicitudin orci, sit amet posuere lacus neque a diam. Suspendisse eros elit, sodales commodo diam a, pharetra eleifend sapien.</p>
-        </blockquote>
-        <p><cite>Suspendisse Eros</cite></p>
-      </div>
-      <div class="testimonial">
-        <blockquote>
-          <p>Nullam sollicitudin, justo sit amet dictum maximus, risus magna sollicitudin orci, sit amet posuere lacus neque a diam. Suspendisse eros elit, sodales commodo diam a, pharetra eleifend sapien.</p>
-        </blockquote>
-        <p><cite>Suspendisse Eros</cite></p>
-      </div>
-      <div class="testimonial">
-        <blockquote>
-          <p>Nullam sollicitudin, justo sit amet dictum maximus, risus magna sollicitudin orci, sit amet posuere lacus neque a diam. Suspendisse eros elit, sodales commodo diam a, pharetra eleifend sapien.</p>
-        </blockquote>
-        <p><cite>Suspendisse Eros</cite></p>
-      </div>
+      <div><?php get_template_part('facebook-like'); ?></div>
     </div>
   </div>
 </div>
