@@ -57,14 +57,6 @@ myApp.directive('selectFile', [function () {
   };
 }]);
 
-myApp.controller('FormCtrl', ['$scope', '$log', function($scope, $log) {
-  $scope.formData = {};
-
-  $scope.submit = function (isValid) {
-    if (isValid) $log.log($scope.formData);
-  };
-}]);
-
 myApp.directive('gmap', [function () {
   return {
     restrict: 'A',
@@ -108,5 +100,78 @@ myApp.directive('addSpan', [function () {
         $(li).addClass('why-' + (key + 1)).prepend('<span></span>');
       });
     }
+  };
+}]);
+
+myApp.directive('fileModel', ['$parse', function ($parse) {
+  return {
+    restrict: 'A',
+
+    link: function (scope, element, attrs) {
+      var model = $parse(attrs.fileModel);
+      var modelSetter = model.assign;
+
+      element.bind('change', function(){
+        scope.$apply(function(){
+          modelSetter(scope, element[0].files[0]);
+        });
+      });
+    }
+  };
+}]);
+
+myApp.factory('submitService', ['$http', function($http) {
+  return {
+
+    getQuote: function(data, root, successCallback, errorCallback) {
+      var fd = new FormData();
+      fd.append('name', data.name);
+      fd.append('email', data.email);
+      fd.append('phone', data.phone);
+      fd.append('userfile', data.userfile);
+
+      $http.post(root + '/process_quote.php', fd, {
+        transformRequest: angular.identity,
+        headers: {
+          'Content-Type': undefined
+        }
+      })
+
+      .success(function(data, status, headers, config) {
+        successCallback(data, status, headers, config);
+      })
+
+      .error(function(data, status, headers, config) {
+        errorCallback(data, status, headers, config);
+      });
+    }
+  };
+}]);
+
+myApp.controller('FormCtrl', ['$scope', '$log', function($scope, $log) {
+  $scope.formData = {};
+
+  $scope.submit = function (isValid) {
+    if (isValid) $log.log($scope.formData);
+  };
+}]);
+
+myApp.controller('QuoteCtrl', ['$scope', '$log', 'submitService', function($scope, $log, submitService) {
+  $scope.formData = {};
+
+  $scope.submit = function (isValid) {
+    if (isValid && $scope.root) submitService.getQuote($scope.formData, $scope.root, $scope.successCallback, $scope.errorCallback);
+  };
+
+  $scope.successCallback = function (data) {
+    $log.log(data);
+  };
+
+  $scope.errorCallback = function (data) {
+    $log.log(data);
+  };
+
+  $scope.setRoot = function (root) {
+    if (root) $scope.root = root;
   };
 }]);
