@@ -20,7 +20,7 @@
       <fieldset class="checks">
         <span>House Plans <span>(Optional)</span></span>
         <div class="file-wrapper" select-file>
-          <input id="userfile" name="userfile" ng-model="formData.userfile" type="file">
+          <input type="file" file-model="formData.userfile">
           <a href="" class="my-btn btn-2"><i class="fa fa-arrow-up"></i> Upload file</a>
         </div>
       </fieldset>
