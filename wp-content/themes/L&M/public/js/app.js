@@ -1,6 +1,6 @@
 'use strict';
 
-var myApp = angular.module('LM', ['duScroll']);
+var myApp = angular.module('LM', ['duScroll', 'checklist-model']);
 
 myApp.directive('owlSingle', [function () {
   return {
@@ -130,6 +130,19 @@ myApp.factory('submitService', ['$http', function($http) {
       fd.append('phone', data.phone);
       fd.append('userfile', data.userfile);
 
+      if (data.products && data.products.length) {
+        var products = '';
+        
+        angular.forEach(data.products, function (product, key) {
+          if (data.products.length == (key + 1))
+            products += product;
+          else
+            products += product + ', ';
+        });
+
+        fd.append('products', products);
+      }
+
       $http.post(root + '/process_quote.php', fd, {
         transformRequest: angular.identity,
         headers: {
@@ -167,27 +180,34 @@ myApp.factory('submitService', ['$http', function($http) {
   };
 }]);
 
-myApp.controller('FormCtrl', ['$scope', '$log', function($scope, $log) {
-  $scope.formData = {};
-
-  $scope.submit = function (isValid) {
-    if (isValid) $log.log($scope.formData);
-  };
-}]);
-
 myApp.controller('ContactCtrl', ['$scope', '$log', 'submitService', function($scope, $log, submitService) {
   $scope.formData = {};
+
+  $scope.showSuccess = false;
+  $scope.showError = false;
 
   $scope.submit = function (isValid) {
     if (isValid && $scope.root) submitService.contact($scope.formData, $scope.root, $scope.successCallback, $scope.errorCallback);
   };
 
   $scope.successCallback = function (data) {
-    $log.log(data);
+    if (data.success) {
+      $scope.showSuccess = true;
+      $scope.showError = false;
+    } else {
+      $scope.showSuccess = false;
+      $scope.showError = true;
+    }
+
+    $scope.formData = {};
+    $scope.contactForm.$setPristine();
   };
 
   $scope.errorCallback = function (data) {
-    $log.log(data);
+    $scope.showSuccess = false;
+    $scope.showError = true;
+    $scope.formData = {};
+    $scope.contactForm.$setPristine();
   };
 
   $scope.setRoot = function (root) {
@@ -198,16 +218,35 @@ myApp.controller('ContactCtrl', ['$scope', '$log', 'submitService', function($sc
 myApp.controller('QuoteCtrl', ['$scope', '$log', 'submitService', function($scope, $log, submitService) {
   $scope.formData = {};
 
+  $scope.products = ['High efficiency boiler', 'High efficiency furnace', 'Gas lines', 'Air Conditioning', 'Fireplace', 'Unit heaters'];
+
+  $scope.showSuccess = false;
+  $scope.showError = false;
+
   $scope.submit = function (isValid) {
+    $scope.showSuccess = false;
+    $scope.showError = false;
     if (isValid && $scope.root) submitService.quote($scope.formData, $scope.root, $scope.successCallback, $scope.errorCallback);
   };
 
   $scope.successCallback = function (data) {
-    $log.log(data);
+    if (data.success) {
+      $scope.showSuccess = true;
+      $scope.showError = false;
+    } else {
+      $scope.showSuccess = false;
+      $scope.showError = true;
+    }
+
+    $scope.formData = {};
+    $scope.quoteForm.$setPristine();
   };
 
   $scope.errorCallback = function (data) {
-    $log.log(data);
+    $scope.showSuccess = false;
+    $scope.showError = true;
+    $scope.formData = {};
+    $scope.quoteForm.$setPristine();
   };
 
   $scope.setRoot = function (root) {

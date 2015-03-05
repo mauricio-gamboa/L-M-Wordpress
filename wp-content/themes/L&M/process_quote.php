@@ -4,7 +4,7 @@ date_default_timezone_set('Etc/UTC');
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
-require "bower_components/PHPMailer/PHPMailerAutoload.php";
+require "PHPMailer/PHPMailerAutoload.php";
 
 if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['phone'])) {
 
@@ -17,6 +17,7 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['phone'])) {
   $name = $_POST['name'];
   $email = $_POST['email'];
   $phone = $_POST['phone'];
+  $products = isset($_POST['products']) ? $_POST['products'] : 'Products not selected.';
 
   $mail = new PHPMailer;
   $mail->isSMTP();
@@ -36,7 +37,7 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['phone'])) {
   $mail->setFrom('mauricio@xubliminal.com', 'Mauricio Gamboa');
   $mail->addAddress('mauricio@xubliminal.com', 'Mauricio Gamboa');
   $mail->Subject = 'Quote Request';
-  $mail->Body = "From: $name\n\nE-Mail: $email\n\nPhone: $phone";
+  $mail->Body = "From: $name\n\nE-Mail: $email\n\nPhone: $phone\n\nProducts: $products";
 
   if (!$mail->send()) {
     $data = array('success' => false, 'message' => 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo);

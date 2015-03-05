@@ -4,7 +4,7 @@ date_default_timezone_set('Etc/UTC');
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
-require "bower_components/PHPMailer/PHPMailerAutoload.php";
+require "PHPMailer/PHPMailerAutoload.php";
 
 if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['phone']) && isset($_POST['message'])) {
 

@@ -28,14 +28,13 @@
       </fieldset>
       <fieldset class="checks">
         <span>Products you are interested in</span>
-        <label for="productA"><input id="productA" name="productA" ng-model="formData.productA" type="checkbox"> Sollicitudin</label>
-        <label for="productB"><input id="productB" name="productB" ng-model="formData.productB" type="checkbox"> Malesuada</label>
-        <label for="productC"><input id="productC" name="productC" ng-model="formData.productC" type="checkbox"> Bibendum</label>
-        <label for="productD"><input id="productD" name="productD" ng-model="formData.productD" type="checkbox"> Praesent</label>
+        <label for="product-{{$index}}" ng-repeat="product in products" ng-cloak><input id="product-{{$index}}" name="product-{{$index}}" checklist-model="formData.products" checklist-value="product" type="checkbox"> {{product}}</label>
       </fieldset>
       <fieldset>
         <button class="my-btn btn-1" type="submit">Get a free quote</button>
       </fieldset>
+      <div ng-show="showSuccess" class="alert alert-success" role="alert">Thanks! We have received your message.</div>
+      <div ng-show="showError" class="alert alert-danger" role="alert">There was an error. Please try again.</div>
     </form>
   </div>
 </div>
