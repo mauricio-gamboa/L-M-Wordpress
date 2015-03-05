@@ -29,6 +29,8 @@
             <?php the_content(); ?>
           </div>
           <?php endforeach; wp_reset_postdata(); ?>
+          <?php else: ?>
+          <div class="alert alert-danger" role="alert">Please create a page that has "why-choose-us" as permalink.</div>
           <?php endif; ?>
           <?php endif; ?>
         </div>

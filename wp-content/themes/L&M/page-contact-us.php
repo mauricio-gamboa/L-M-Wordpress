@@ -45,10 +45,15 @@
     </div>
   </div>
 </section>
-<?if ($lat && $long): ?>
+
 <section id="map">
+  <?if ($lat && $long): ?>
   <div gmap lat="<?php echo $lat; ?>" lng="<?php echo $long; ?>"></div>
+  <?php else: ?>
+  <div>
+    <div class="alert alert-danger" role="alert">Please create custom fields called "lat" and "long" in the Contact Us page.</div>
+  </div>
+  <?php endif; ?>
 </section>
-<?php endif; ?>
 <?php endwhile; ?>
 <?php get_footer(); ?>

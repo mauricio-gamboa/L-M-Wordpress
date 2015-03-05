@@ -37,9 +37,11 @@
           <?php endif; ?>
         </div>
         <img class="guy hide-xs" src="<?php bloginfo('template_directory'); ?>/public/images/guy.png" alt="">
+        <?php endforeach; wp_reset_postdata(); ?>
+        <?php else: ?>
+        <div class="alert alert-danger" role="alert">Please create a page that has "home-content" as permalink.</div>
+        <?php endif; ?>
       </div>
-      <?php endforeach; wp_reset_postdata(); ?>
-      <?php endif; ?>
     </div>
   </div>
   <section id="header-services">
@@ -47,8 +49,9 @@
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
           
-          <?php if($services): ?>
+          
           <div class="service-wrapper list-unstyled hide-xs">
+            <?php if($services): ?>
             <?php foreach ( $services as $key=>$post ) : setup_postdata( $post ); ?>
             <div class="service">
               <span class="services-icon">
@@ -58,27 +61,27 @@
               <?php the_content(); ?>
             </div>
             <?php endforeach; wp_reset_postdata(); ?>
+            <?php else: ?>
+            <div class="alert alert-danger" role="alert">Please create a Custom Post type called "service".</div>
+            <?php endif; ?>
           </div>
-          <?php endif; ?>
           
           <div class="show-xs">
+            <?php if($services): ?>
             <div class="service-wrapper list-unstyled owl-carousel" owl-services>
+              <?php foreach ( $services as $key=>$post ) : setup_postdata( $post ); ?>
               <div class="service">
-                <span class="services-icon icon-1"></span>
-                <h5>PLUMBInG</h5>
-                <p>Onec a quam ac nibh tdunt mattis.</p>
+                <span class="services-icon icon-1">
+                  <?php if (has_post_thumbnail()) : the_post_thumbnail(); endif; ?>
+                </span>
+                <h5><?php the_title(); ?></h5>
+                <?php the_content(); ?>
               </div>
-              <div class="service">
-                <span class="services-icon icon-2"></span>
-                <h5>Heating</h5>
-                <p>Onec a quam ac nibh tdunt mattis.</p>
-              </div>
-              <div class="service">
-                <span class="services-icon icon-3"></span>
-                <h5>Air Conditioning</h5>
-                <p>Onec a quam ac nibh tdunt mattis.</p>
-              </div>
+              <?php endforeach; wp_reset_postdata(); ?>
             </div>
+            <?php else: ?>
+            <div class="alert alert-danger" role="alert">Please create a Custom Post type called "service".</div>
+            <?php endif; ?>
           </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 hide-s hide-xs">
@@ -105,6 +108,8 @@
           <?php the_content(); ?>
           <?php endforeach; wp_reset_postdata(); ?>
         </div>
+        <?php else: ?>
+        <div class="alert alert-danger" role="alert">Please create a page that has "home-content" as permalink.</div>
         <?php endif; ?>
       </div>
       <div class="col-xs-12 col-sm-5 col-md-4 col-lg-4 hide-xs">
@@ -129,6 +134,8 @@
         <h3><?php the_title (); ?></h3>
         <?php the_content(); ?>
         <?php endforeach; wp_reset_postdata(); ?>
+        <?php else: ?>
+        <div class="alert alert-danger" role="alert">Please create a page that has "commercial-services" as permalink.</div>
         <?php endif; ?>
       </div>
       
@@ -144,6 +151,8 @@
           </div>
           <?php endforeach; wp_reset_postdata(); ?>
         </div>
+        <?php else: ?>
+        <div class="alert alert-danger" role="alert">Please create a Custom Post type called "testimonial".</div>
         <?php endif; ?>
       </div>
     </div>
@@ -151,17 +160,20 @@
   </div>
   <img src="<?php bloginfo('template_directory'); ?>/public/images/guy-2.png" alt="" class="guy hide-xs">
 </section>
+
 <section id="why-choose-us">
   <div class="container">
     <div class="row">
-      <?php if($why_choose_us_page): ?>
-      <?php foreach ( $why_choose_us_page as $key=>$post ) : setup_postdata( $post ); ?>
       <div class="col-xs-12 col-sm-6 col-md-8 col-lg-8" add-span>
+        <?php if($why_choose_us_page): ?>
+        <?php foreach ( $why_choose_us_page as $key=>$post ) : setup_postdata( $post ); ?>
         <h3>Why Choose Us?</h3>
         <?php the_content(); ?>
+        <?php endforeach; wp_reset_postdata(); ?>
+        <?php else: ?>
+        <div class="alert alert-danger" role="alert">Please create a page that has "why-choose-us" as permalink.</div>
+        <?php endif; ?>
       </div>
-      <?php endforeach; wp_reset_postdata(); ?>
-      <?php endif; ?>
 
       <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
         <div class="facebook-plugin">
@@ -172,11 +184,11 @@
   </div>
 </section>
 
-<?php if($brands): ?>
 <section id="brands">
   <div class="container">
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <?php if($brands): ?>
         <div class="brands-wrapper">
           <h3>Brands we use</h3>
           <div class="brands-slider owl-carousel" owl-brands>
@@ -185,10 +197,13 @@
             <?php endforeach; wp_reset_postdata(); ?>
           </div>
         </div>
+        <?php else: ?>
+        <div class="alert alert-danger" role="alert">Please create a Custom Post type called "brand".</div>
+        <?php endif; ?>
       </div>
     </div>
   </div>
 </section>
-<?php endif; ?>
+
 
 <?php get_footer(); ?>
