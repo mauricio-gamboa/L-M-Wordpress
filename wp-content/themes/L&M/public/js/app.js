@@ -123,7 +123,7 @@ myApp.directive('fileModel', ['$parse', function ($parse) {
 myApp.factory('submitService', ['$http', function($http) {
   return {
 
-    getQuote: function(data, root, successCallback, errorCallback) {
+    quote: function(data, root, successCallback, errorCallback) {
       var fd = new FormData();
       fd.append('name', data.name);
       fd.append('email', data.email);
@@ -134,6 +134,25 @@ myApp.factory('submitService', ['$http', function($http) {
         transformRequest: angular.identity,
         headers: {
           'Content-Type': undefined
+        }
+      })
+
+      .success(function(data, status, headers, config) {
+        successCallback(data, status, headers, config);
+      })
+
+      .error(function(data, status, headers, config) {
+        errorCallback(data, status, headers, config);
+      });
+    },
+
+    contact: function(data, root, successCallback, errorCallback) {
+      $http({
+        method: 'POST',
+        url: root + '/process_contact.php',
+        data: $.param(data),
+        headers : { 
+          'Content-Type': 'application/x-www-form-urlencoded'
         }
       })
 
@@ -156,11 +175,31 @@ myApp.controller('FormCtrl', ['$scope', '$log', function($scope, $log) {
   };
 }]);
 
+myApp.controller('ContactCtrl', ['$scope', '$log', 'submitService', function($scope, $log, submitService) {
+  $scope.formData = {};
+
+  $scope.submit = function (isValid) {
+    if (isValid && $scope.root) submitService.contact($scope.formData, $scope.root, $scope.successCallback, $scope.errorCallback);
+  };
+
+  $scope.successCallback = function (data) {
+    $log.log(data);
+  };
+
+  $scope.errorCallback = function (data) {
+    $log.log(data);
+  };
+
+  $scope.setRoot = function (root) {
+    if (root) $scope.root = root;
+  };
+}]);
+
 myApp.controller('QuoteCtrl', ['$scope', '$log', 'submitService', function($scope, $log, submitService) {
   $scope.formData = {};
 
   $scope.submit = function (isValid) {
-    if (isValid && $scope.root) submitService.getQuote($scope.formData, $scope.root, $scope.successCallback, $scope.errorCallback);
+    if (isValid && $scope.root) submitService.quote($scope.formData, $scope.root, $scope.successCallback, $scope.errorCallback);
   };
 
   $scope.successCallback = function (data) {

@@ -15,7 +15,11 @@
         <?php foreach ( $home_content_page as $key=>$post ) : setup_postdata( $post ); ?>
         <div class="header-text">
           <h2><?php the_title(); ?></h2>
-          <div class="phone-xs show-xs">CALL 604-879-5301</div>
+
+          <?php if ( function_exists( 'contact_detail' ) ): ?>
+          <div class="phone-xs show-xs">CALL <?php contact_detail( 'phone' ); ?></div>
+          <?php endif; ?>
+
           <img class="guy show-xs" src="<?php bloginfo('template_directory'); ?>/public/images/guy-xs.png" alt="">
           <div id="quote-form-xs" class="quote-form show-xs">
             <div class="form-header">
@@ -27,7 +31,10 @@
           <p class="hide-xs">
             <?php echo get_the_excerpt(); ?>
           </p>
-          <span class="phone-literal hide-xs">call <br class="show-s" /> 604-879-5301</span>
+
+          <?php if ( function_exists( 'contact_detail' ) ): ?>
+          <span class="phone-literal hide-xs">call <br class="show-s" /> <?php contact_detail( 'phone' ); ?></span>
+          <?php endif; ?>
         </div>
         <img class="guy hide-xs" src="<?php bloginfo('template_directory'); ?>/public/images/guy.png" alt="">
       </div>
