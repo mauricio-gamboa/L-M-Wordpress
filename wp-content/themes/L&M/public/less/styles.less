@@ -869,6 +869,11 @@ Content Styles
           }
         }
       }
+
+      .alert {
+        margin-top: 20px;
+        margin-bottom: 0;
+      }
     }
 
     &.dark {
@@ -1316,6 +1321,15 @@ Footer Styles
         }
       }
     }
+
+    #mc_embed_signup_scroll {
+      float: left;
+
+      .alert {
+        margin-bottom: 0;
+        margin-top: 20px;
+      }
+    }
   }
 
   #footer-bottom {
@@ -1424,6 +1438,13 @@ Form Styles
         border-color: @red-1;
         box-shadow: 0 0 5px -1px @red-1;
       }
+    }
+  }
+
+  input {
+    &.mce_inline_error {
+      border-color: @red-1;
+      box-shadow: 0 0 5px -1px @red-1;
     }
   }
 }

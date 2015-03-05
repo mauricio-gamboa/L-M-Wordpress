@@ -21,6 +21,8 @@
         <fieldset>
           <button class="my-btn btn-1" type="submit">Get a free quote</button>
         </fieldset>
+        <div ng-show="showSuccess" class="alert alert-success" role="alert">Thanks! We have received your message.</div>
+        <div ng-show="showError" class="alert alert-danger" role="alert">There was an error. Please try again.</div>
       </form>
     </div>
   </div>

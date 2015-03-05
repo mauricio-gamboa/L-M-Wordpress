@@ -23,15 +23,7 @@
         <div class="row">
           <div class="col-xs-12 col-sm-9 col-md-8 col-lg-6">
             <h1 class="logo white"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-            <div ng-controller="FormCtrl">
-              <form name="subscribeForm" ng-submit="submit(subscribeForm.$valid)" class="form subscribe" role="form" novalidate>
-                <h6>Get the Latest news updates</h6>
-                <fieldset class="clearfix">
-                  <input id="email" name="email" ng-model="formData.email" type="email" placeholder="Enter you email address" required>
-                  <button type="submit" class="my-btn btn-1">Subscribe</button>
-                </fieldset>
-              </form>
-            </div>
+            <?php get_template_part('mailchimp-form'); ?>
           </div>
           <div class="col-xs-12 col-sm-3 col-md-offset-1 col-md-3 col-lg-offset-4 col-lg-2">
             <div class="social-wrapper">

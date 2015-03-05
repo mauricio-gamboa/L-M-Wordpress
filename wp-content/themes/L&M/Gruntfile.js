@@ -32,7 +32,8 @@ module.exports = function(grunt) {
         'bower_components/OwlCarousel/owl-carousel/owl.carousel.js',
         'bower_components/bootstrap/dist/js/bootstrap.js',
         'bower_components/angular/angular.js',
-        'bower_components/angular-scroll/angular-scroll.js'
+        'bower_components/angular-scroll/angular-scroll.js',
+        'bower_components/checklist-model/checklist-model.js'
         ],
         dest: 'public/js/libs.js'
       }
