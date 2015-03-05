@@ -1,9 +1,11 @@
 <div class="form-content" ng-controller="QuoteCtrl" ng-init="setRoot('<?php bloginfo('template_directory'); ?>')">
   <img class="bg-form" src="<?php bloginfo('template_directory'); ?>/public/images/bg-form.png" alt="">
   <div>
-    <div class="contact-person">
-      Contact us using the form below or call <br>Kevin at <strong>604-879-5301</strong> for a free quote
-    </div>
+
+    <?php if ( function_exists( 'contact_detail' ) ): ?>
+    <div class="contact-person">Contact us using the form below or call <br>Kevin at <strong><?php contact_detail( 'phone' ); ?></strong> for a free quote</div>
+    <?php endif; ?>
+    
     <form name="quoteForm" ng-submit="submit(quoteForm.$valid)" class="form" role="form" novalidate>
       <fieldset>
         <label for="name">Your Name</label>

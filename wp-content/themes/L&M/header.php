@@ -16,10 +16,12 @@
           <h1 class="logo"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
           <div class="contact">
             <div><?php get_template_part('facebook-share'); ?></div>
+            <?php if ( function_exists( 'contact_detail' ) ): ?>
             <div class="phone">
               call now
-              <span>604-879-5301</span>
+              <span><?php contact_detail( 'phone' ); ?></span>
             </div>
+            <?php endif; ?>
           </div>
         </div>
       </div>
